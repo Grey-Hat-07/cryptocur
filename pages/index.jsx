@@ -1,9 +1,9 @@
-import type { NextPage } from 'next'
+//import type { NextPage } from 'next'
 import Head from 'next/head'
 import { useEffect, useState } from 'react';
+import Card from '../components/Card';
 
-
-const Home: NextPage = () => {
+const Home = () => {
 // const options = {
 //   method: 'GET',
 //   url: 'https://coinranking1.p.rapidapi.com/coins',
@@ -32,7 +32,7 @@ const Home: NextPage = () => {
       }
     })
       .then(response => response.json())
-      .then(data => setData(data))
+      .then(data => setData(data.data.coins))
       .catch(err => console.log(err));
   },[]);
   console.log(data)
@@ -40,12 +40,19 @@ const Home: NextPage = () => {
   
    
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center py-2">
+    <div className="">
       <Head>
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
+    <Card/>
+    {data&&data.map(item => (
+      <div className='flex' key={item.uuid}>
+        <h1>{item.name}</h1>
+        <p>{item.symbol}</p>
+        <img src={item.iconUrl} className='w-10 h-10'/>
+        </div>))
+}
      
     </div>
   )
