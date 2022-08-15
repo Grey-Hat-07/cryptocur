@@ -2,26 +2,11 @@
 import Head from 'next/head'
 import { useEffect, useState } from 'react';
 import Card from '../components/Card';
+import Sidebar from '../components/Sidebar';
+
 
 const Home = () => {
-// const options = {
-//   method: 'GET',
-//   url: 'https://coinranking1.p.rapidapi.com/coins',
-//   params: {
-//     referenceCurrencyUuid: 'yhjMzLPhuIDl',
-//     timePeriod: '24h',
-//     'tiers[0]': '1',
-//     orderBy: 'marketCap',
-//     orderDirection: 'desc',
-//     limit: '50',
-//     offset: '0'
-//   },
-//   headers: {
-//     'X-RapidAPI-Key': '323c7e8ec9msh65adfc7e90148c8p11cce2jsn2fbbd6e8d26e',
-//     'X-RapidAPI-Host': 'coinranking1.p.rapidapi.com'
-//   }
-// };
-
+  
   const [data, setData] = useState([]);
   useEffect(() => {
     fetch('https://coinranking1.p.rapidapi.com/coins', {
@@ -41,19 +26,20 @@ const Home = () => {
    
   return (
     <div className="">
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      <script src="/js/charts.js" async ></script>
       <Head>
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-    <Card/>
-    {data&&data.map(item => (
-      <div className='flex' key={item.uuid}>
-        <h1>{item.name}</h1>
-        <p>{item.symbol}</p>
-        <img src={item.iconUrl} className='w-10 h-10'/>
-        </div>))
-}
-     
+      <Sidebar/>
+    <div className='flex'>
+    {data&&data.map((item,index) => (
+      <div key={index}>
+     <Card data={item}/>
+     </div>))
+    }</div>
+     <canvas id="myChart" width="400" height="400"></canvas>
     </div>
   )
 }
