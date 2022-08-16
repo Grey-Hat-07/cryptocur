@@ -26,14 +26,13 @@ const Home = () => {
    
   return (
     <div className="">
-      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-      <script src="/js/charts.js" async ></script>
+     
       <Head>
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Sidebar/>
-    <div className='flex'>
+    <div className=' grid grid-cols-5'>
     {data&&data.map((item,index) => (
       <div key={index}>
      <Card data={item}/>
