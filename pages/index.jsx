@@ -3,10 +3,10 @@ import Head from 'next/head'
 import { useEffect, useState } from 'react';
 import Card from '../components/Card';
 import Sidebar from '../components/Sidebar';
-
+import { Chart } from "react-google-charts";
 
 const Home = () => {
-  
+
   const [data, setData] = useState([]);
   useEffect(() => {
     fetch('https://coinranking1.p.rapidapi.com/coins', {
@@ -19,26 +19,37 @@ const Home = () => {
       .then(response => response.json())
       .then(data => setData(data.data.coins))
       .catch(err => console.log(err));
-  },[]);
+  }, []);
   console.log(data)
-  
-  
-   
+
+
+
   return (
     <div className="">
-     
+      {/* <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js" async></script> */}
+      {/* <script src="/js/chart.js" async></script> */}
       <Head>
-        <title>Create Next App</title>
+        <title>CryptoCur</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Sidebar/>
-    <div className=' grid grid-cols-5'>
-    {data&&data.map((item,index) => (
-      <div key={index}>
-     <Card data={item}/>
-     </div>))
-    }</div>
-     <canvas id="myChart" width="400" height="400"></canvas>
+      <Sidebar />
+
+      <div className=' grid md:grid-cols-5 grid-cols-2'>
+        {data && data.map((item, index) => (
+          <div key={index}>
+            <Card data={item} />
+          </div>))
+        }</div>
+      <Chart
+        chartType="LineChart"
+        data={[["Stock","year"],["Bitcoin", 1000],["Ethereum", 1170],["Litecoin", 660],["Ripple", 1030]]}
+        width="100%"
+        height="400px"
+        legendToggle
+      />
+
+      {/* <div id="curve_chart" style={{width: '500px', height: '500px'}}></div> */}
+
     </div>
   )
 }
