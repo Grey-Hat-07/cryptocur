@@ -1,9 +1,8 @@
 //import type { NextPage } from 'next'
-import Head from 'next/head'
+
 import { useEffect, useState } from 'react';
 import Card from '../components/Card';
-import Sidebar from '../components/Sidebar';
-import { Chart } from "react-google-charts";
+import Link from 'next/link';
 
 const Home = () => {
 
@@ -28,28 +27,13 @@ const Home = () => {
     <div className="">
       {/* <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js" async></script> */}
       {/* <script src="/js/chart.js" async></script> */}
-      <Head>
-        <title>CryptoCur</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <Sidebar />
-
+      
       <div className=' grid md:grid-cols-5 grid-cols-2'>
         {data && data.map((item, index) => (
           <div key={index}>
             <Card data={item} />
           </div>))
         }</div>
-      <Chart
-        chartType="LineChart"
-        data={[["Stock","year"],["Bitcoin", 1000],["Ethereum", 1170],["Litecoin", 660],["Ripple", 1030]]}
-        width="100%"
-        height="400px"
-        legendToggle
-      />
-
-      {/* <div id="curve_chart" style={{width: '500px', height: '500px'}}></div> */}
-
     </div>
   )
 }
