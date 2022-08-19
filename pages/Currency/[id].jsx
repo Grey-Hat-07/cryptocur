@@ -4,9 +4,12 @@ export default function Currency(props) {
   console.log(props);
   return (
     <div>
+      <div className='flex'>
+        <img src={props.coin.iconUrl} alt={props.coin.name} width='50' height='50' />
+        <h1>{props.coin.name}</h1>
+      </div>
 
-      <img src={props.coin.iconUrl} alt={props.coin.name} width='50' height='50' />
-      <div className="grid md:grid-cols-2 m-2">
+      <div className="grid grid-cols-2 m-2">
         <div className="col-span-1">
           <Chart
             chartType="LineChart"
